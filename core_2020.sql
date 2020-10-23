@@ -1,0 +1,1 @@
+select article_id as cset_id, cluster as cluster_id from  `202005_p0_clustering.citation_pairs_inref_outref_or_2017_0720_clusters`
