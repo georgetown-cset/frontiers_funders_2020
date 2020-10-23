@@ -12,7 +12,7 @@ select *, IF(gr_rank < (select N from num_obs) *  0.07, 1, 0) as y_pred  from
  gr_rank from pred)
 ),
 CSI_tab as (
-select cluster_id, gr_rank, chinese_share, ai_share, N_clust, growth_per_year_since_peak, IF(growth_per_year_since_peak > 0.08,1,0) as x_growth,
+select cluster_id, gr_rank, chinese_language_share, ai_share, N_clust, growth_per_year_since_peak, IF(growth_per_year_since_peak > 0.08,1,0) as x_growth,
  y_pred  from  (select *,  count(cluster_id) OVER() as N_clust from
 frontiers_forecasting.reg_data_{year})
   s inner join rank_pred ON s.cluster_id = rank_pred.id
