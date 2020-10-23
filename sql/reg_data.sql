@@ -10,6 +10,25 @@ year >=  2005
 frontiers_forecasting.assignment_{year}) cl ON c.merged_id =
 cl.article_id
 ),
+/* Calculate Chinease shares and AI shares */
+ai_tab as (
+select cluster_id as id, sum(IF(ai is null, 0,ai ))/count(*) as ai_share from
+corp_0 left join
+(
+select cset_id, CAST(IF(ai_filtered is null, false, ai_filtered) as INT64) as  ai from article_classification.predictions
+) ai_p ON corp_0.merged_id = ai_p.cset_id group by cluster_id
+
+),
+chinese_l as (
+select distinct cluster_id as id, sum(IF(ch_ind is null, 0,ch_ind ))/count(*) as chinese_share from
+(select merged_id, ch_ind   from
+(select distinct id,1 as ch_ind from gcp_cset_links_v2.all_metadata_with_cld2_lid where  title_cld2_lid_first_result_short_code = 'zh') c
+inner join (select merged_id, orig_id from gcp_cset_links_v2.article_links_with_dataset) m ON c.id = m.orig_id) c
+right join corp_0 ON c.merged_id=corp_0.merged_id
+group by cluster_id
+),
+
+
 /* Calculate the number of papers in the cluster in forecasting year.   */
 N_for_t as
 (
@@ -96,8 +115,13 @@ from merge_data
 )
 /* merge and export */
 select * except(id) from (
+select * except(id) from (
 select * except(id) from
-(select * from std_calc) f inner join (select cluster_id as id , IF(chinese_share > 0.5,1,0) as CH,
-IF(ai_pred > 0.5, 1,0) as AI from science_map.dc5_clust_stat_stable) c ON f.cluster_id = c.id
+(select * from std_calc) f inner join
+ai_tab ON f.cluster_id = ai_tab.id
+) f inner join chinese_l
+ ON f.cluster_id = chinese_l.id
  ) c left join N_for_t ON c.cluster_id = N_for_t.id
+
+
 

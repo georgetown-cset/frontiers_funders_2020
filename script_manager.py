@@ -113,7 +113,7 @@ if __name__ == "__main__":
     # create data directories if nedeed:
     add_acc_message("Started running frontiers code.")
     add_acc_message("Updating BQ tables.")
-    for year in [2014, 2016, 2020]:
+    for year in [2014, 2016, 2019]:
         run_bq_queries(year)
 
 
