@@ -16,3 +16,177 @@ Updating BQ tables.
 Load query order from query_order.csv
 Read text of queries from .sql files. Create a dictionary {table name : query text}
 Running querry assign_inter
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from forecasting_qlist.csv
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from forecasting_qlist.csv
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from forecasting_qlist.csv
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from forecasting_qlist.csv
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from forecasting_qlist.csv
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from forecasting_qlist.csv
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from forecasting_qlist.csv
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from query_list.csv
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from query_list.csv
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from query_list.csv
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from query_list.csv
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assign_inter_2014 for year 2014
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from query_list.csv
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assign_inter_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assignment_2014 for year 2014
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from query_list.csv
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assign_inter_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assignment_2014 for year 2014
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from query_list.csv
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assign_inter_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assignment_2014 for year 2014
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from query_list.csv
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assign_inter_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assignment_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query Top250J_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_1_2014 for year 2014
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from query_list.csv
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assign_inter_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assignment_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query Top250J_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_1_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_2_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query backcasting_data_2014 for year 2014
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from query_list.csv
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assign_inter_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assignment_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query Top250J_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_1_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_2_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query backcasting_data_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query reg_data_2014 for year 2014
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from query_list.csv
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assign_inter_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assignment_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query Top250J_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_1_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_2_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query backcasting_data_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query reg_data_2014 for year 2014
+Load query order from query_list.csv
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assign_inter_2016 for year 2016
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assignment_2016 for year 2016
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query Top250J_2016 for year 2016
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_1_2016 for year 2016
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_2_2016 for year 2016
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_2016 for year 2016
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query backcasting_data_2016 for year 2016
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query reg_data_2016 for year 2016
+Load query order from query_list.csv
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assign_inter_2020 for year 2020
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query assignment_2020 for year 2020
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query Top250J_2020 for year 2020
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_1_2020 for year 2020
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_2_2020 for year 2020
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query future_assignment_2020 for year 2020
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query backcasting_data_2020 for year 2020
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query reg_data_2020 for year 2020

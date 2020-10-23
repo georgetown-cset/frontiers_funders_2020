@@ -1,6 +1,6 @@
-ITH cl as (
+WITH cl as (
 /* CHANGE LATER */
-select cluster_id, article_id from science_map.assign_inter_{year}
+select cluster_id, article_id from frontiers_forecasting.assign_inter_{year}
 ),
 cl_size as (select cluster_id from (select count(distinct article_id) as N, cluster_id   from cl group by cluster_id) where N < 50)
 ,

@@ -7,7 +7,7 @@ select year, merged_id,  ({year} - year) as age from gcp_cset_links_v2.corpus_me
 /* data starts at 2005 */
 year >=  2005
 ) c inner join (select article_id, cluster_id from
-frontiers_forecasting.assignment_{year}_latest) cl ON c.merged_id =
+frontiers_forecasting.assignment_{year}) cl ON c.merged_id =
 cl.article_id
 ),
 /* Calculate the number of papers in the cluster in forecasting year.   */
@@ -38,7 +38,7 @@ cit_st as (
 select distinct id, avg(cit_age) as pap_cit_age_avg, count(cit_id) as pap_cit from
 (
 /* the age of each citation as of forecasting year */
-select id, cit_id, year, {for_year} - year as  cit_age   from
+select id, cit_id, year, {year} - year as  cit_age   from
 (select ref_id as id, id as cit_id from gcp_cset_links_v2.mapped_references) c inner join corp ON
 c.cit_id = corp.merged_id
 /* drop all references from papers published after the forecasting year */
@@ -58,7 +58,7 @@ group by cluster_id
 clust_top250 as (
 select cluster_id as id, log(N) as  log_N_top250  from (
 select cluster_id, count(distinct corp.merged_id) as N from
-(select merged_id from frontiers_forecasting.Top250J_{year}_latest)
+(select merged_id from frontiers_forecasting.Top250J_{year})
  t inner join corp ON t.merged_id = corp.merged_id group
  by cluster_id
 )
@@ -74,7 +74,7 @@ select cluster_id, cit_vit_4thr, paper_vit, IF(log_N_top250 is null, 0, log_N_to
 left join clust_top250 ON m.cluster_id = clust_top250.id) m
 /* add peak */
 /* brinng peak year calculation and other stuff */
-inner join (select * from frontiers_forecasting.backcasting_data_{year}_latest) p
+inner join (select * from frontiers_forecasting.backcasting_data_{year}) p
 ON m.cluster_id = p.id
 ),
 /* merge with growth rate*/

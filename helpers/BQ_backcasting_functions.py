@@ -30,16 +30,6 @@ client = bigquery.Client(project='gcp-cset-projects', credentials=credentials)
 
 
 
-
-# report the total number of observation and the number distinct IDs
-def bq_qc(tab, id):
-    bq = bigquery.Client(project='gcp-cset-projects')
-    query = f"SELECT count(*) as N, count(distinct {id}) as dist_cl_ids FROM science_map.{tab}"
-    query_job = bq.query(query)
-    data = query_job.result()
-    rows = list(data)
-    add_acc_message(f"Table {tab} has {rows[0][0]} rows and {rows[0][1]} unique {id}s")
-
 # copy BQ tables:
 def bq_copy_table(source_dataset, source_table, dest_dataset, dest_table, client):
     source_table_id = f'gcp-cset-projects.{source_dataset}.{source_table}'
@@ -261,31 +251,6 @@ def get_QC(ai, first_year, for_year, fut_year, n_for_rest, v):
     return modularity, rev_qc
 
 
-
-
-def get_forecasts(start_loop, end_loop,  n_for_rest, ai, first_year):
-    df = pd.DataFrame(columns=['year', 'Variant', 'Precision', 'Recall', 'CSI', 'N_clust', 'paper_vit_std',
-                               'growth_stage_std', 'log_N_top250_std', 'cit_vit_4thr_std', 'growth_per_year_since_peak',
-                               'modularity', 'rev_qc'])
-    for year in range(start_loop, end_loop + 1):
-        fut_year_loop = year + 3
-        add_acc_message(f"Run backcasting for {year} - {fut_year_loop}. AI flag is {ai}")
-        for v in range(1,10):
-            # specify model:
-            prec, rec, CSI, N_clust, paper_vit_std, growth_stage_std, log_N_top250_std, cit_vit_4thr_std, \
-                growth_per_year_since_peak = get_CSI(ai, first_year, year, fut_year_loop , n_for_rest, v)
-            # get QC measures:
-            modularity, rev_qc = get_QC(ai, first_year, year, fut_year_loop, n_for_rest, v)
-            # prepare data for export
-            df = df.append({'year': year, 'Variant': v, 'Precision' : prec, 'Recall': rec, 'CSI': CSI, 'N_clust' : N_clust,
-                            'paper_vit_std' : paper_vit_std, 'growth_stage_std': growth_stage_std, 'log_N_top250_std': log_N_top250_std,
-                            'cit_vit_4thr_std':cit_vit_4thr_std, 'growth_per_year_since_peak': growth_per_year_since_peak,
-                            'modularity' : modularity, 'rev_qc' : rev_qc},
-                           ignore_index=True)
-    df_name = {True : 'AI', False : 'Full'}
-    df.to_csv(f'results_for_{df_name[ai]}.csv')
-    # upload results to GCP
-    upload_blob('science_clustering', f'results_for_{df_name[ai]}.csv',f'results/results_for_{df_name[ai]}.csv')
 
 
 

@@ -1,7 +1,5 @@
 WITH cl as (
-/* CHANGE LATER */
-
-select cluster as cluster_id, article_id from frontiers_forecasting.clusters_{year}_mapped
+select cluster_id, cset_id as article_id from frontiers_forecasting.clusters_{year}_mapped
 ),
 cl_size as (select cluster_id from (select count(distinct article_id) as N, cluster_id   from cl group by cluster_id) where N < 50)
 ,

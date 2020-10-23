@@ -1,6 +1,6 @@
 /* Future data */
 WITH cl as (
-select cluster_id, article_id from frontiers_forecasting.future_assignment_2_{year}_latest
+select cluster_id, article_id from frontiers_forecasting.future_assignment_2_{year}
 ),
 paper_cur as (
 select merged_id as id, year from gcp_cset_links_v2.corpus_merged where year <= {year + 3}

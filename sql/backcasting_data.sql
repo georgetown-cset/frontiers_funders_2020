@@ -3,9 +3,9 @@ WITH
 corp_0 as (
 select year, merged_id, age, cluster_id from (
 select year, merged_id,  ({year} - year) as age from gcp_cset_links_v2.corpus_merged where year <= {year} and
-year >= {first_year}
+year >= 2005
 ) c inner join (select article_id, cluster_id from
- september_20_clustering_experiments.assignment_{year}_latest)
+ frontiers_forecasting.assignment_{year})
 cl ON c.merged_id = cl.article_id
 ),
 /* Calculate the number of papers in the cluster in forecasting year.   */
@@ -55,7 +55,7 @@ select distinct cluster_id, N_share as N_for_share from global_share_cal  where 
 corp_fut as (
 select distinct m.* from (
 select distinct * except(merged_id) from (
-select cluster_id, article_id from september_20_clustering_experiments.future_bc_{year}_latest
+select cluster_id, article_id from frontiers_forecasting.future_assignment_{year}
 ) f inner join (select year, merged_id from gcp_cset_links_v2.corpus_merged where year = {year+3}) m ON
  f.article_id = m.merged_id
 /* keep only papers conencted to the clusters in the corpus defined in corp_0 table (all clusters, not just the large ones )  */
