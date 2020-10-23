@@ -20,7 +20,7 @@ select cset_id, CAST(IF(ai_filtered is null, false, ai_filtered) as INT64) as  a
 
 ),
 chinese_l as (
-select distinct cluster_id as id, sum(IF(ch_ind is null, 0,ch_ind ))/count(*) as chinese_share from
+select distinct cluster_id as id, sum(IF(ch_ind is null, 0,ch_ind ))/count(*) as chinese_language_share from
 (select merged_id, ch_ind   from
 (select distinct id,1 as ch_ind from gcp_cset_links_v2.all_metadata_with_cld2_lid where  title_cld2_lid_first_result_short_code = 'zh') c
 inner join (select merged_id, orig_id from gcp_cset_links_v2.article_links_with_dataset) m ON c.id = m.orig_id) c
