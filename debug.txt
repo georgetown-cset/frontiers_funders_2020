@@ -308,3 +308,45 @@ Updating BQ tables.
 Load query order from query_list.csv
 Read text of queries from .sql files. Create a dictionary {table name : query text}
 Run query reg_data_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query forecast_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query funders_forecast_2014 for year 2014
+Load query order from query_list.csv
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query reg_data_2016 for year 2016
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query forecast_2016 for year 2016
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query funders_forecast_2016 for year 2016
+Load query order from query_list.csv
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query reg_data_2019 for year 2019
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query forecast_2019 for year 2019
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query funders_forecast_2019 for year 2019
+Started running frontiers code.
+Started running frontiers code.
+Updating BQ tables.
+Load query order from query_list.csv
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query reg_data_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query forecast_2014 for year 2014
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query funders_forecast_2014 for year 2014
+Load query order from query_list.csv
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query reg_data_2016 for year 2016
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query forecast_2016 for year 2016
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query funders_forecast_2016 for year 2016
+Load query order from query_list.csv
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query reg_data_2019 for year 2019
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query forecast_2019 for year 2019
+Read text of queries from .sql files. Create a dictionary {table name : query text}
+Run query funders_forecast_2019 for year 2019

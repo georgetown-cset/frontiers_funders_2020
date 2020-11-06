@@ -11,13 +11,25 @@ IF(unique_funder = 'eu', 1,0) as eu
 from  frontiers_forecasting.full_funder_table_wPaperID
 ),
 /* get authors affiliation. Indicator for at least one authors from one these countries */
-country_tab as (
-select distinct merged_id, IF(alpha_3 = 'USA', 1,0) as USA_affiliation,  IF(alpha_3 = 'JPN', 1,0) as Japan_affiliation,  IF( shared_functions.IsEU(alpha_3), 1,0) as EU_affiliation,   IF(alpha_3 = 'CHN', 1,0) as China_affiliation
+chinese as (
+select distinct  merged_id  from  (select merged_id, orig_id FROM  frontiers_forecasting.article_links_2020_10_19 ) c inner join
+(select  id from  frontiers_forecasting.all_metadata_with_cld2_lid where lower( title_cld2_lid_first_result) = 'chinese' ) l ON
+c.orig_id = l.id where merged_id in ( select  merged_id from frontiers_forecasting.corpus_merged where doctype !=  "Patent" or  doctype != "Dataset" or  doctype is  Null)
+),
+country_tab_0 as (
+select distinct merged_id, IF(alpha_3 = 'USA', 1,0) as USA_affiliation,  IF(alpha_3 = 'JPN', 1,0) as Japan_affiliation,
+  IF( shared_functions.IsEU(alpha_3), 1,0) as EU_affiliation,   IF(alpha_3 = 'CHN', 1,0) as China_affiliation
 from
 (
-select merged_id, alpha_3 from gcp_cset_links_v2.paper_affiliations_merged
+select merged_id, alpha_3 from frontiers_forecasting.paper_affiliations_merged
 )
 ),
+country_tab as (
+select merged_id, IF(merged_id in (select * from chinese ) and merged_id in
+((select merged_id from frontiers_forecasting.article_links_2020_10_19 where orig_id like '%CNKI%') ) ,1,China_affiliation),
+EU_affiliation, Japan_affiliation , USA_affiliation from country_tab
+
+)
 /* merge clusters and country affiliations */
 merge_cl as (
 select * except(merged_id) from (

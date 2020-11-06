@@ -10,25 +10,6 @@ year >=  2005
 frontiers_forecasting.assignment_{year}) cl ON c.merged_id =
 cl.article_id
 ),
-/* Calculate Chinease shares and AI shares */
-ai_tab as (
-select cluster_id as id, sum(IF(ai is null, 0,ai ))/count(*) as ai_share from
-corp_0 left join
-(
-select cset_id, CAST(IF(ai_filtered is null, false, ai_filtered) as INT64) as  ai from article_classification.predictions
-) ai_p ON corp_0.merged_id = ai_p.cset_id group by cluster_id
-
-),
-chinese_l as (
-select distinct cluster_id as id, sum(IF(ch_ind is null, 0,ch_ind ))/count(*) as chinese_language_share from
-(select merged_id, ch_ind   from
-(select distinct id,1 as ch_ind from gcp_cset_links_v2.all_metadata_with_cld2_lid where  title_cld2_lid_first_result_short_code = 'zh') c
-inner join (select merged_id, orig_id from gcp_cset_links_v2.article_links_with_dataset) m ON c.id = m.orig_id) c
-right join corp_0 ON c.merged_id=corp_0.merged_id
-group by cluster_id
-),
-
-
 /* Calculate the number of papers in the cluster in forecasting year.   */
 N_for_t as
 (
@@ -43,6 +24,27 @@ select count(distinct merged_id) as N_total, cluster_id  from corp_0  group by c
 /* Keep only papers with more than 19 in the forecasting year in the corpus */
 corp as (select * except(id, N_for) , IF(N_for is null, 0, N_for) as N_for from corp_0
 inner join N_for_t ON corp_0.cluster_id = N_for_t.id
+),
+/* Calculate Chinease shares and AI shares */
+ai_tab as (
+select * from 
+(
+select cluster_id as id, sum(ai) / sum(IF(ai is null,0,1)) as ai_share, sum(IF(ai is null,1,0))/count(*)  as miss_ai_class from
+corp
+
+left join
+(
+select cset_id, CAST(ai_filtered as INT64) as  ai from article_classification.predictions
+) ai_p ON corp.merged_id = ai_p.cset_id group by cluster_id
+)
+),
+chinese_l as (
+select distinct cluster_id as id, sum(IF(ch_ind is null, 0,ch_ind ))/count(*) as chinese_language_share from
+(select merged_id, ch_ind   from
+(select distinct id,1 as ch_ind from gcp_cset_links_v2.all_metadata_with_cld2_lid where  title_cld2_lid_first_result_short_code = 'zh') c
+inner join (select merged_id, orig_id from gcp_cset_links_v2.article_links_with_dataset) m ON c.id = m.orig_id) c
+right join corp ON c.merged_id=corp.merged_id
+group by cluster_id
 ),
 /* Add the number of publications to the forecasting year. If a cluster has no publications in the forecasting year, it is dropped.
 We will later set the future publications to zero for these papers */
@@ -122,6 +124,3 @@ ai_tab ON f.cluster_id = ai_tab.id
 ) f inner join chinese_l
  ON f.cluster_id = chinese_l.id
  ) c left join N_for_t ON c.cluster_id = N_for_t.id
-
-
-
