@@ -20,7 +20,7 @@ select distinct year, count(distinct merged_id) as N_per_year, cluster_id from c
 /* global publications per year */
 global_pubs_per_year as (
 /* glaobal publications are calculated for all clusters as a based, not just large clusters used in the regression */
-select distinct year as y, count(distinct merged_id) as N_G_year from corp_0 group by year
+select distinct year as y, count(distinct merged_id) as N_G_year from corp group by year
 ),
 global_share_cal as (
 /* left join because some clusters are missing pubs in some year, so we need to convert these missing values to zero */
@@ -43,7 +43,7 @@ cit_cl as (
 select id, cit_vit_4thr from (
 select id, POWER(cit_vit,0.25) as cit_vit_4thr from (
 select distinct cluster_id as id, cit_vit from
-science_map.dc5_stat_clust_proc_stable)
+science_map.dc5_stat_clust_proc_stable where  year_n >= 20)
 )),
 /* top 250 journals */
 clust_top250 as (
@@ -55,11 +55,12 @@ select cluster_id, count(distinct corp.merged_id) as N from
 )
 ),
 merge_data as (
-select * except(id) from (
+/* if a cluster did not have any pubs in top250 journals make it zero */
+select * except(id, log_N_top250), IF(log_N_top250 is null, 0, log_N_top250) as log_N_top250  from (
 select * except(id) from (
 select * except(id) from
-(select cluster_id, paper_vit,chinese_share, ai_pred, miss_ai_data_share, cl_pred, cv_pred, ro_pred, keyword, subject from science_map.dc5_stat_clust_proc_stable) m
-left join (select id, IF(log_N_top250 is null, 0, log_N_top250) as log_N_top250 from clust_top250) j on m.cluster_id = j.id) m
+(select cluster_id, paper_vit,chinese_share, ai_pred, miss_ai_data_share, cl_pred, cv_pred, ro_pred, keyword, subject from science_map.dc5_stat_clust_proc_stable  where  year_n >= 20) m
+left join (select id, log_N_top250 from clust_top250) j on m.cluster_id = j.id) m
 left join (select id, cit_vit_4thr  from cit_cl) c on m.cluster_id = c.id) m
 left join (select id, growth_stage from peak_year_calc) p ON m.cluster_id = p.id
 ),
