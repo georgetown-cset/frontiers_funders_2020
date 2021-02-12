@@ -1,0 +1,25 @@
+REGEXP_CONTAINS(LOWER(str), r"(active learning)|(adaptive learning)|(anomaly detection)|(artificial intelligence)|
+(associative learning)|(auto.?encoder)|(autonomous navigation)|(autonomous system)|(autonomous vehicle)|
+(average.?link clustering)|(back.?propagation)|(binary classification)|(bionlp)|(boltzmann machine)|
+(character recognition)|(classification algorithm)|(classification label)|(clustering method)|
+(complete link clustering)|(computer aided diagnosis)|(computer vision)|(deep learning)|(ensemble learning)|
+(evolutionary algorithm)|(fac\S+ expression recognition)|(fac\S+ identi)|(fac\S+ recognition)|(feature extraction)|
+(feature learning)|(feature matching)|(feature selection)|(feature vector)|(feed.?forward network)|(fuzzy clustering)|
+(generative adversarial network)|(generative model)|(gradient algorithm)|(graph matching)|(graphical model)|
+(handwriting recognition)|(hierarchical clustering)|(hierarchical model)|(human robot)|(image annotation)|
+(image classifi)|(image matching)|(image processing)|(image registration)|(image representation)|(image retrieval)|
+(incremental clustering)|(information extraction)|(information fusion)|(information retrieval)|(k.nearest neighbor)|
+(knowledge.based system)|(knowledge discovery)|(knowledge representation)|(language identification)|(language model)|
+(machine learning)|(machine perception)|(machine translation)|(multi.?class classification)|
+(multi.?label classification)|(multi.?task learning)|(natural language generation)|(natural language processing)|
+(natural language understanding)|(neural network)|(object recognition)|(one.?shot learning)|(pattern matching)|
+(pattern recognition)|(random forest)|(recommend\S+ system)|(recurrent network)|(reinforcement learning)|(robotics)|
+(scen\S+ classification)|(scen\S+ understanding)|(self.?driving auto)|(self.?driving car)|(semi.?supervised learning)|
+(sentiment classification)|(single.?link clustering)|(spatial learning)|(speech processing)|(speech recognition)|
+(speech synthesi)|(statistical learning)|(supervised learning)|(support vector machine)|(text mining)|
+(text processing)|(transfer learning)|(transformer.based)|(translation system)|(unsupervised learning)|
+(video classification)|(video processing)|(zero shot learning)|(人工智能)|(自编码)|(自动编码)|(自主导航)|(自动驾驶)|
+(无人驾驶)|(反向传播)|(玻尔兹曼机)|(计算机视觉)|(深度学习)|(深层学习)|(人脸识别)|(面部识别)|(面像识别)|(面容识别)|(前馈网络)|
+(生成.+?对抗网络)|(生成模型)|(图模型)|(信息抽取)|(知识表示)|(语言模型)|(机器学习)|(机器翻译)|(自然语言处理)|(自然语言理解)|(神经网络)|
+(一次[性]?学习)|(模式识别)|(随机森林)|(机器人.+?学)|(循环网络)|(回馈网络)|(回归网络)|(递归网络)|(反馈网络)|(强化[性]?学习)|(语音识别)|
+(语音合成)|(监督学习)|(支持向量机)|(迁移学习)|(转移学习)|(基于变换器)|(人机交互)|(机器视觉)|(零次[性]?学习)|(零样本)")

@@ -94,11 +94,11 @@ def bq_copy_labels(source_dataset, source_table, dest_dataset, dest_table, clien
     client.update_table(table_d, ["schema", "description"])
 
 # runs a sql querry query_dic[name] and saves results in private_ai_investment dataset.
-def bq_job(name, query_dic, client, year):
+def bq_job(name, query_dic, client):
     # set current data
     # extract querry text
     querry_text = query_dic[name]
-    for bq_tname in [f'{name}_latest']:
+    for bq_tname in [f'{name}']:
         # Run querry. Save results for archive with a date and latest version in BQ and bucket
             table_ref = client.dataset("science_map").table(bq_tname)
             job_config = bigquery.QueryJobConfig()
@@ -113,19 +113,10 @@ def bq_job(name, query_dic, client, year):
     # report the number of observations in a table and the number of unique cluster_ids. Don't for tables without
     # cluster IDs
     # Unique IDs are article id
-    if name in ['dc5_need_to_translate', 'article_dates']:
-        bq_qc(f'{name}_latest', 'merged_id')
-    elif name in ['dc5_cit_links_clusters_top20', 'dc5_cit_links_clusters_top100']:
-        bq_qc(f'{name}_latest', 'dc5_id')
-        bq_qc(f'{name}_latest', 'dc5_id')
-    elif name != 'add_trans_to_corp':
-        bq_qc(f'{name}_latest', 'cluster_id')
-    elif name == 'add_trans_to_corp':
-        print('IDs are counted in the table: add_trans_to_corp')
-    else:
-        print('Error of bq_job. Check the table name')
+    bq_qc(f'{name}', 'cluster_id')
 
-def run_bq_queries(year):
+
+def run_bq_queries():
 # read the order or running querries
     add_acc_message("Load query order from query_order.csv")
     with open('query_order.csv',  encoding='utf-8-sig') as f:
@@ -137,7 +128,7 @@ def run_bq_queries(year):
     add_acc_message("Read text of queries from .sql files. Create a dictionary {table name : query text}")
     for q in qlist:
 # extract the string from list. This would be name of table in science_map
-        with open(f'sql/{q[0]}.sql', 'r') as file:
+        with open(f'main_sql/{q[0]}.sql', 'r') as file:
             # read querry
             qtext = file.read().replace('\n', ' ')
         query_dic.update({q[0]:qtext})
@@ -162,9 +153,9 @@ def assign_stable_version(date, dataset):
         print(t[0])
         if t[0] != 'dc5_need_to_translate' and t[0] != 'add_trans_to_corp':
             #copy table to stable
-            bq_copy_table(dataset, t[0] + f'_{date}', dataset, t[0] + '_stable', client)
+            bq_copy_table(dataset, t[0] + f'_{date}', dataset, t[0] , client)
             #copy label from latest table to stable table
-            bq_copy_labels(dataset, t[0] + '_latest', dataset, t[0] + '_stable', client)
+            bq_copy_labels(dataset, t[0] + '_latest', dataset, t[0] , client)
         # copy the dated table and rename it with postfix '_latest'
 
 

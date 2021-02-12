@@ -1,1 +1,0 @@
-select cset_id, cluster_id from september_20_clustering_experiments.clusters_2014_mapped

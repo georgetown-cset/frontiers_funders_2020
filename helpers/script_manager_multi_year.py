@@ -64,41 +64,41 @@ def bq_job(bq_tname, query_dic, client, year):
 
 
 # read query from file and insert variables in the text of the query
-def read_sql(q):
-    with open(f'main_sql/{q}.sql', 'r') as file:
+def read_sql(q, year):
+    with open(f'sql/{q}.sql', 'r') as file:
         # read querry
         qtext = file.read()
         qtext = eval(f'f"""{qtext}"""')
         qtext = qtext.replace('\n', ' ')
-        tab_name = q
+        tab_name = q + '_' + str(year)
         return tab_name, {tab_name:qtext}
 
-# Loop over the list of queries and process them
-def eval_sql_q(qlist):
+# Loop over the list of queris and process them
+def eval_sql_q(qlist, year):
     query_dic = {}
     for q in qlist:
-        q_name, sql_dic = read_sql(q[0])
+        q_name, sql_dic = read_sql(q[0], year)
         query_dic.update(sql_dic)
         # report dict: {query name: query text}
     return query_dic
 
 
-def run_bq_queries():
+def run_bq_queries(year):
 # read the order or running querries
     add_acc_message("Load query order from query_list.csv")
     with open('query_order.csv',  encoding='utf-8-sig') as f:
         reader = csv.reader(f)
         qlist = list(reader)
     # process SQL query with correct year and table version
-    query_dic = eval_sql_q(qlist)
+    query_dic = eval_sql_q(qlist, year)
     # loop over SQL queries:
     for q in query_dic:
         # Run journal forecast only once per year
         add_acc_message("Read text of queries from .sql files. Create a dictionary {table name : query text}")
-        query_dic = eval_sql_q(qlist)
-        add_acc_message(f"Run query {q} for year")
+        query_dic = eval_sql_q(qlist, year)
+        add_acc_message(f"Run query {q} for year {year}")
         # Don't save the version in the journal table name
-        bq_job(q, query_dic, client)
+        bq_job(q, query_dic, client, year)
 
 
 
@@ -113,7 +113,7 @@ if __name__ == "__main__":
     # create data directories if nedeed:
     add_acc_message("Started running frontiers code.")
     add_acc_message("Updating BQ tables.")
-    #for year in [2014, 2016, 2019]:
-    run_bq_queries()
+    for year in [2014, 2016, 2019]:
+        run_bq_queries(year)
 
 
